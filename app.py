@@ -51,8 +51,26 @@ def create_app():
                 "is_alive": character.is_alive
             })
         return jsonify({"error": "Character not found"}), 404
-
-    # Removidas rotas de example (opcional)
+        
+    @app.route("/character/remove/<int:id>", methods=["POST"])  # DELETE single id
+    def remove_character(id):
+        character = CharactersFinder.get_from_id(id)
+        if character:
+            success = CharactersHandler.delete_character(character)
+            if success:
+                return jsonify({"message": f"Character {id} removed successfully"}), 200
+            return jsonify({"error": "Failed to delete character"}), 500
+        return jsonify({"error": "Character not found"}), 404
+    
+    @app.route("/character/delete_all", methods=["POST"])  #DELETE all elements of the table
+    def delete_all():
+        try:
+            db_session.query(Characters).delete()
+            db_session.commit()
+            return jsonify({"message": "All characters deleted"}), 200
+        except Exception as e:
+            db_session.rollback()
+            return jsonify({"error": str(e)}), 500
 
     return app
 
