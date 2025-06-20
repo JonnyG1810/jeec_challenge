@@ -16,6 +16,9 @@ class Characters(Base, ModelMixin):
     gender = Column(String(30))
     is_alive = Column(Boolean, default = True)         # 1 sim || 0 não
 
+    #species = Column(String(100))
+    #series = Column(String(100))
+
 
     def __repr__(self):
         return f"<Character {self.id}: {self.name}>"
