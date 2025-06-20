@@ -1,5 +1,7 @@
 from typing import Dict, Optional
 from jeec_app.models.characters import Characters
+from    database import db_session
+
 
 class UpdateCharacterService:
     def __init__(self, character: Characters, kwargs: Dict):
