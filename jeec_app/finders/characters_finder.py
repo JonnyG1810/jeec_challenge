@@ -39,6 +39,24 @@ class CharactersFinder:
             session.close()
 
     @classmethod
+    def get_by_species(cls, species):
+        query, session = Characters.get_query()
+        try:
+            result = query.filter_by(Characters.species == species).all()
+            return result
+        finally:
+            session.close()
+    
+    @classmethod
+    def get_by_series(cls, series):
+        query, session = Characters.get_query()
+        try:
+            result = query.filter_by(Characters.series == series).all()
+            return result
+        finally:
+            session.close()
+            
+    @classmethod
     def get_all(cls):
         query, session = Characters.get_query()
         try:
