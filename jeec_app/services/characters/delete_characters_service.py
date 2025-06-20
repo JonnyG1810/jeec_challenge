@@ -1,4 +1,6 @@
 from jeec_app.models.characters import Characters
+from    database import db_session
+
 
 class DeleteCharacterService:
     def __init__(self, character: Characters):
